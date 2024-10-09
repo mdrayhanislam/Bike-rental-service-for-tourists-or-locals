@@ -7,4 +7,4 @@ export const USER_Role = {
 export const USER_STATUS = {
   ACTIVE: 'ACTIVE',
   BLOCKED: 'BLOCKED',
-};
+} as const;
