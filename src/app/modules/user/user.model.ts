@@ -33,7 +33,7 @@ const userSchema = new Schema<TUser>({
   },
   status: {
     type: String,
-    required: [true, 'Status is required'],
+    // required: [true, 'Status is required'],
     enum: Object.keys(USER_STATUS),
     default: USER_STATUS.ACTIVE,
   },

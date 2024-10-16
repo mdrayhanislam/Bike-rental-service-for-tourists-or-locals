@@ -1,26 +1,45 @@
-import { catchAsync } from '../../utils/catchAsync';
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { Request, Response } from 'express';
+// import { catchAsync } from '../../utils/catchAsync';
 import { UserServices } from './user.service';
 
-const createAdmin = catchAsync(async (req, res) => {
-  const result = await UserServices.createAdminIntoDB(req.body);
+const createAdmin = async (req: Request, res: Response) => {
+  try {
+    const result = await UserServices.createAdminIntoDB(req.body);
 
-  res.status(200).json({
-    success: true,
-    message: 'Admin is created successfully!',
-    data: result,
-  });
-});
+    res.status(200).json({
+      success: true,
+      statusCode: 201,
+      message: 'User Create successfully!',
+      data: result,
+    });
+  } catch (err: any) {
+    res.status(500).json({
+      success: false,
+      message: err.message || 'something went wrong',
+      error: err,
+    });
+  }
+};
 
-const updateUser = catchAsync(async (req, res) => {
-  const { userId } = req.params;
-  const result = await UserServices.updateUser(userId, req.body);
+const updateUser = async (req: Request, res: Response) => {
+  try {
+    const { userId } = req.params;
+    const result = await UserServices.updateUser(userId, req.body);
 
-  res.status(200).json({
-    success: true,
-    message: 'User updated successfully!',
-    data: result,
-  });
-});
+    res.status(200).json({
+      success: true,
+      message: 'User updated successfully!',
+      data: result,
+    });
+  } catch (err: any) {
+    res.status(500).json({
+      success: false,
+      message: err.message || 'something went wrong',
+      error: err,
+    });
+  }
+};
 
 export const userControllers = {
   createAdmin,
