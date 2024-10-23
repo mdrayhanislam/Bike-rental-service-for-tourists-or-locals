@@ -24,6 +24,7 @@ const createAdmin = async (req: Request, res: Response) => {
 
 const updateUser = async (req: Request, res: Response) => {
   try {
+    // console.log('test', req.user);
     const { userId } = req.params;
     const result = await UserServices.updateUser(userId, req.body);
 
